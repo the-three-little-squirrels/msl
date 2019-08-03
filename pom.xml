@@ -2,7 +2,16 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <!--声明项目描述符遵循哪一个POM模型版本。模型本身的版本很少改变，虽然如此，但它仍然是必不可少的，这是为了当Maven引入了新的特性或者其他模型变更的时候，确保稳定性。-->
     <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.anpai</groupId>
+    <artifactId>msl</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <!--项目的名称, Maven产生的文档用--><!--项目的名称, Maven产生的文档用-->
+    <description>Micro Service Learning</description>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -10,13 +19,31 @@
         <version>2.1.6.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    
-    <groupId>com.anpai</groupId>
-    <artifactId>msl</artifactId>
-    <version>1.0-SNAPSHOT</version>
+
+    <properties>
+        <java.version>1.8</java.version>
+        <project.build.souceEncoding>UTF-8</project.build.souceEncoding>
+        <spring-cloud.version>Greenwich.SR2</spring-cloud.version>
+    </properties>
+
+    <!-- 继承自该项目的所有子项目的默认依赖信息。这部分的依赖信息不会被立即解析,而是当子项目声明一个依赖（必须描述group ID和 artifact ID信息），
+    如果group ID和artifact ID以外的一些信息没有描述，则通过group ID和artifact ID 匹配到这里的依赖，并使用这里的依赖信息。-->
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
 
     <modules>
         <module>msrc</module>
+        <module>mscc</module>
     </modules>
 
 
